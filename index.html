@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corpos em Movimento, Vidas Transformadas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FBF9F1;
+            color: #424242;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #E57373;
+        }
+        .solution-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .impact-item.highlight {
+            background-color: #E8F5E9;
+            border-left-color: #4CAF50;
+        }
+        .gallery-image {
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-bold text-lg md:text-xl text-[#4DB6AC]">Colibris em Movimento</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#desafio" class="nav-link">O Desafio</a>
+                <a href="#solucao" class="nav-link">A Solução</a>
+                <a href="#impacto" class="nav-link">O Impacto</a>
+                <a href="#galeria" class="nav-link">Galeria</a>
+                <a href="#roteiro" class="nav-link">O Roteiro</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#desafio" class="block py-2 px-6 text-sm hover:bg-gray-100">O Desafio</a>
+            <a href="#solucao" class="block py-2 px-6 text-sm hover:bg-gray-100">A Solução</a>
+            <a href="#impacto" class="block py-2 px-6 text-sm hover:bg-gray-100">O Impacto</a>
+            <a href="#galeria" class="block py-2 px-6 text-sm hover:bg-gray-100">Galeria</a>
+            <a href="#roteiro" class="block py-2 px-6 text-sm hover:bg-gray-100">O Roteiro</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-[60vh] flex items-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://i.imgur.com/8z2bE1w.jpg');">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Corpos em Movimento, <br class="hidden md:block"/> Vidas Transformadas</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-200">Descubra como a união entre comunidade, espaço público e saúde está redefinindo o bem-estar e o empoderamento feminino no bairro Colibris, em João Pessoa.</p>
+            </div>
+        </section>
+
+        <section id="desafio" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2">A Corrida de Obstáculos Diária</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600">Para muitas mulheres, especialmente em comunidades com menos recursos, a prática de atividade física é uma jornada cheia de barreiras. Não se trata de falta de vontade, mas de um sistema complexo de desafios sociais, ambientais e pessoais. Explore abaixo os principais obstáculos identificados.</p>
+                </div>
+                
+                <div class="chart-container mb-12">
+                    <canvas id="barreirasChart"></canvas>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-[#E57373]">A Tirania do Tempo</h4>
+                        <p>A dupla ou tripla jornada de trabalho, somando o emprego formal aos cuidados com a casa e a família, deixa as mulheres sem tempo ou energia para o autocuidado. O lazer é visto como luxo, não como direito.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-[#4DB6AC]">O Muro Psicológico e Social</h4>
+                        <p>Falta de companhia, cansaço, timidez e medo de lesões são barreiras internas significativas. A falta de uma rede de apoio que incentive e valide o tempo para si mesma cria um forte desestímulo.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                         <h4 class="font-bold text-xl mb-2 text-[#FFB74D]">O Ambiente Hostil</h4>
+                        <p>Ruas mal iluminadas, praças abandonadas, a sensação de insegurança e a falta de dinheiro para academias formam barreiras físicas e econômicas. Um ambiente que não convida à prática esportiva.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucao" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2">A Solução: Um Ecossistema de Cuidado</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600">Em Colibris, a mudança aconteceu a partir da sinergia entre três pilares fundamentais. A combinação de investimento público e iniciativa comunitária criou um ambiente fértil para a saúde e o bem-estar florescerem. Clique nos cartões para saber mais.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="solution-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleDetails('details-praca')">
+                        <div class="text-5xl mb-4 text-[#81C784]">🌳</div>
+                        <h4 class="font-bold text-2xl mb-2">A Praça que Acolhe</h4>
+                        <p class="text-gray-600">A infraestrutura do lazer e da saúde.</p>
+                        <div id="details-praca" class="hidden text-left mt-4 text-sm text-gray-600">
+                            <p>A praça revitalizada deixou de ser um espaço de passagem para se tornar o coração da comunidade. Equipada com quadra, playground e academia ao ar livre, ela oferece um local seguro, gratuito e convidativo, eliminando a barreira da "falta de um local apropriado".</p>
+                        </div>
+                    </div>
+                    <div class="solution-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleDetails('details-usf')">
+                        <div class="text-5xl mb-4 text-[#4DB6AC]">🏥</div>
+                        <h4 class="font-bold text-2xl mb-2">A Saúde ao Alcance</h4>
+                        <p class="text-gray-600">O suporte técnico e profissional.</p>
+                        <div id="details-usf" class="hidden text-left mt-4 text-sm text-gray-600">
+                            <p>A nova USF Integrada, vizinha à praça, funciona como um pilar de apoio. Com equipe multiprofissional (fisioterapeuta, psicólogo, ginecologista), ela oferece orientação para uma prática segura, conecta o exercício à saúde integral e legitima a iniciativa da comunidade.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleDetails('details-mulheres')">
+                        <div class="text-5xl mb-4 text-[#E57373]">🏃‍♀️</div>
+                        <h4 class="font-bold text-2xl mb-2">As Mulheres em Ação</h4>
+                        <p class="text-gray-600">A força da iniciativa comunitária.</p>
+                        <div id="details-mulheres" class="hidden text-left mt-4 text-sm text-gray-600">
+                             <p>As mulheres são as protagonistas. Ao se organizarem em grupos de exercício, elas transformam a infraestrutura em um espaço vivo de empoderamento. O grupo cria uma rede de apoio, motivação e companhia, quebrando o ciclo do isolamento e da falta de incentivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2">Do Obstáculo à Superação: O Impacto Real</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600">O ecossistema criado em Colibris não apenas removeu barreiras, mas gerou um ciclo virtuoso de saúde, empoderamento e fortalecimento comunitário. Veja como cada desafio foi enfrentado. Passe o mouse sobre uma barreira para ver a solução correspondente.</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-xl mb-4 text-center">Barreiras Identificadas</h4>
+                        <ul class="space-y-3">
+                           <li data-target="solucao-tempo" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Falta de tempo / Dupla Jornada</li>
+                           <li data-target="solucao-lesao" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Medo de lesão / Falta de orientação</li>
+                           <li data-target="solucao-motivacao" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Falta de motivação / Companhia</li>
+                           <li data-target="solucao-local" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Falta de local seguro e apropriado</li>
+                           <li data-target="solucao-custo" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Custo financeiro</li>
+                           <li data-target="solucao-isolamento" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Isolamento social / Saúde mental</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-4 text-center">Soluções em Colibris</h4>
+                         <ul class="space-y-3">
+                           <li id="solucao-tempo" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Atividade gratuita e próxima de casa, otimizando o tempo livre.</li>
+                           <li id="solucao-lesao" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Acesso à orientação da equipe multiprofissional da USF.</li>
+                           <li id="solucao-motivacao" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">A força do grupo, que cria compromisso e uma rede de apoio.</li>
+                           <li id="solucao-local" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">A praça revitalizada como um ambiente seguro e convidativo.</li>
+                           <li id="solucao-custo" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">Exercícios 100% gratuitos em espaço e com equipamentos públicos.</li>
+                           <li id="solucao-isolamento" class="impact-item p-4 bg-gray-50 rounded-lg border-l-4 border-gray-200 transition">O grupo como ferramenta de coesão social e combate ao isolamento.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria com apenas duas imagens locais -->
+        <section id="galeria" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2">A Vida em Movimento</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600">Imagens que capturam a essência da transformação em Colibris: espaços revitalizados, comunidade ativa e saúde florescendo.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="img1.jpg" alt="Descrição da imagem 1" class="w-full h-full object-cover gallery-image">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="img2.jpg" alt="Descrição da imagem 2" class="w-full h-full object-cover gallery-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roteiro" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2">Replicando o Sucesso: Um Roteiro para Ação</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600">A experiência de Colibris não é um caso isolado, mas um modelo que pode ser adaptado e replicado. A mudança é possível quando a comunidade e o poder público trabalham juntos.</p>
+                </div>
+                <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <h4 class="font-bold text-2xl mb-4 text-[#81C784]">Para a Comunidade</h4>
+                        <ul class="space-y-4 list-disc list-inside text-gray-700">
+                            <li><span class="font-semibold">Comece pequeno:</span> Organize-se com vizinhas e amigas. Um pequeno grupo já cria compromisso e segurança.</li>
+                            <li><span class="font-semibold">Ocupe os espaços:</span> Identifique a praça ou rua mais segura do bairro e comece a usá-la. A ocupação positiva gera mais segurança.</li>
+                            <li><span class="font-semibold">Engaje a USF:</span> Procure a Unidade de Saúde da Família do seu bairro. Apresente o grupo e peça apoio e orientação. A ESF tem o dever de apoiar.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <h4 class="font-bold text-2xl mb-4 text-[#4DB6AC]">Para Gestores Públicos</h4>
+                         <ul class="space-y-4 list-disc list-inside text-gray-700">
+                            <li><span class="font-semibold">Planeje de forma integrada:</span> Secretarias de urbanismo, esporte e saúde devem trabalhar juntas. Investir em praças é investir em saúde preventiva.</li>
+                            <li><span class="font-semibold">Invista no modelo "USF do Futuro":</span> Equipes multiprofissionais na atenção primária previnem doenças, reduzem custos futuros e melhoram a qualidade de vida.</li>
+                            <li><span class="font-semibold">Seja um catalisador:</span> Profissionais de saúde devem ir ao território, identificar e apoiar as iniciativas da própria comunidade, atuando como pontes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Corpos em Movimento. Uma iniciativa para inspirar saúde e comunidade.</p>
+            <p class="text-sm text-gray-400 mt-2">Este é um projeto de demonstração baseado no relatório sobre atividade física em Colibris, João Pessoa.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const ctx = document.getElementById('barreirasChart').getContext('2d');
+        const barreirasChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Falta de local apropriado', 'Falta de companhia', 'Falta de dinheiro', 'Falta de energia/cansaço', 'Medo de lesão/queda', 'Timidez'],
+                datasets: [{
+                    label: '% de mulheres que relatam a barreira',
+                    data: [43.6, 40.9, 37.8, 38.2, 28.2, 21.6],
+                    backgroundColor: [
+                        'rgba(77, 182, 172, 0.7)',
+                        'rgba(229, 115, 115, 0.7)',
+                        'rgba(255, 183, 77, 0.7)',
+                        'rgba(129, 199, 132, 0.7)',
+                        'rgba(100, 181, 246, 0.7)',
+                        'rgba(149, 117, 205, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(77, 182, 172, 1)',
+                        'rgba(229, 115, 115, 1)',
+                        'rgba(255, 183, 77, 1)',
+                        'rgba(129, 199, 132, 1)',
+                        'rgba(100, 181, 246, 1)',
+                        'rgba(149, 117, 205, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.formattedValue + '%';
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Principais Barreiras para a Prática de Atividade Física',
+                        font: {
+                            size: 16
+                        },
+                        color: '#424242'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '%'
+                        }
+                    },
+                    y: {
+                       ticks: {
+                            autoSkip: false,
+                            callback: function(value, index, values) {
+                                const label = this.getLabelForValue(value);
+                                if (label.length > 25) {
+                                    return label.substring(0, 25) + '...';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        function toggleDetails(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('hidden');
+        }
+
+        const impactItems = document.querySelectorAll('.impact-item[data-target]');
+        impactItems.forEach(item => {
+            const targetId = item.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+
+            item.addEventListener('mouseenter', () => {
+                targetElement.classList.add('highlight');
+            });
+            item.addEventListener('mouseleave', () => {
+                targetElement.classList.remove('highlight');
+            });
+        });
+    </script>
+
+</body>
+</html>
